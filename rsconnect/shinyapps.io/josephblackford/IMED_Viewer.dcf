@@ -1,0 +1,12 @@
+name: IMED_Viewer
+title: IMED_Viewer
+username: josephblackford
+account: josephblackford
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17677359
+bundleId: 12378523
+url: https://josephblackford.shinyapps.io/IMED_Viewer/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

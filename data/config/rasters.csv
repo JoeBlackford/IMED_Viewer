@@ -1,0 +1,14 @@
+display_name,filename,type,palette,units,description,category,reverse_palette
+Domain IMED Score,Domain_IMED_Score.tif,Continuous,RdYlGn_r,Score,Overall IMED score,Overall,FALSE
+Domain IMED Decile,Domain_IMED_Decile.tif,Decile,RdYlGn,Decile,Overall IMED national decile,Overall,TRUE
+Subdomain Climate,SubDomain_IMED_Climate.tif,Continuous,RdYlGn_r,Score,IMED Climate subdomain score,Climate,FALSE
+Subdomain Nature,SubDomain_IMED_Nature.tif,Continuous,RdYlGn_r,Score,IMED Nature subdomain score,Nature,FALSE
+Subdomain Pollution,SubDomain_IMED_Pollution.tif,Continuous,RdYlGn_r,Score,IMED Pollution subdomain score,Pollution,FALSE
+Flood Risk from Rivers and Sea,Indicator_Climate_FRRS.tif,Continuous,Blues,Score,Flood risk from rivers and sea,Climate,FALSE
+Flood Risk from Surface Water,Indicator_Climate_FRSW.tif,Continuous,Blues,Score,Flood risk from surface water,Climate,FALSE
+Projected Heat,Indicator_Climate_ProjectedHeat.tif,Continuous,RdYlGn_r,Score,Projected heat exposure,Climate,FALSE
+Access to Greenspace,Indicator_Nature_AccessToGreenspace.tif,Continuous,RdYlGn_r,Score,Access to greenspace,Nature,FALSE
+Quality Habitat Deficit,Indicator_Nature_QualityHabitatDeficit.tif,Continuous,RdYlGn_r,Score,Quality habitat deficit,Nature,FALSE
+Nitrogen Dioxide (NO?),Indicator_Poll_NO2_2021_2023.tif,Continuous,RdYlGn_r,µg/m³,Nitrogen dioxide concentration (2021–2023),Pollution,FALSE
+Environmental Noise,Indicator_Poll_Noise.tif,Continuous,RdYlGn_r,Score,Environmental noise indicator,Pollution,FALSE
+PM2.5,Indicator_Poll_PM25_2021_2023.tif,Continuous,RdYlGn_r,µg/m³,PM2.5 concentration (2021–2023),Pollution,FALSE

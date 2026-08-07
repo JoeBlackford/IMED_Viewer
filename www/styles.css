@@ -1,0 +1,60 @@
+/* General */
+
+body {
+    font-size: 14px;
+}
+
+/* Metadata Card */
+.metadata-card {
+    display: block;
+    width: 100%;
+
+    background-color: #ffffff !important;
+
+    border: 1px solid #d9dee3;
+    border-radius: 10px;
+
+    padding: 18px;
+    margin-bottom: 15px;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+    box-sizing: border-box;
+}
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+.navbar {
+    background-color: #005EB8 !important;
+    border-bottom: none;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: 600;
+}
+
+.navbar-brand:hover {
+    color: white !important;
+}
+
+.tab-content {
+    padding-top: 15px;
+}
+
+.tab-pane {
+
+    background: white;
+
+    border: 1px solid #d9dee3;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    margin-top: 15px;
+
+}
+

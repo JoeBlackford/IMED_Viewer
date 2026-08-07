@@ -1,0 +1,85 @@
+---
+title: "IMED Viewer"
+format:
+  dashboard:
+    theme: cosmo
+server: shiny
+---
+
+## 
+
+```{r}
+library(leaflet)
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron)
+```
+
+```{r}
+#| context: server
+
+renderText({
+  paste("You selected:", input$n)
+})
+```
+
+```{r}
+library(terra)
+library(leaflet)
+
+tif_folder <- "M:/Info/Projects/Health Inequalities and PHM/IMED Data"
+
+tif_files <- list.files(
+  tif_folder,
+  pattern="\\.tif$",
+  full.names=TRUE
+)
+
+names(tif_files) <- tools::file_path_sans_ext(
+  basename(tif_files)
+)
+```
+
+```{r}
+selectInput(
+  "layer",
+  "Choose indicator",
+  choices = names(tif_files)
+)
+```
+
+```{r}
+leafletOutput("map", height = 800)
+```
+
+```{r}
+output$map <- renderLeaflet({
+  
+  r <- rast(tif_files[[1]])
+  
+  r <- aggregate(
+    r,
+    fact = 5,
+    fun = mean,
+    na.rm = TRUE
+  )
+  
+  pal <- colorNumeric(
+    "YlOrRd",
+    domain = values(r),
+    na.color = "transparent"
+  )
+  
+  leaflet() %>%
+    
+    addProviderTiles(providers$CartoDB.Positron) %>%
+    
+    addRasterImage(
+      r,
+      colors = pal,
+      opacity = 0.8,
+      project = TRUE
+    )
+  
+})
+```
