@@ -1,6 +1,6 @@
 FROM rocker/r-ver:4.6.1
 
-# Install system libraries required by sf and terra
+# Install system libraries
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -15,15 +15,16 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install R packages
+WORKDIR /srv/shiny-server
+
+# Copy the project FIRST
+COPY . .
+
+# Install renv
 RUN Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
-RUN Rscript -e "renv::restore()"
 
-# Copy app
-COPY . /srv/shiny-server/
-
-# Give the shiny user ownership
-RUN chown -R shiny:shiny /srv/shiny-server
+# Restore packages
+RUN Rscript -e "renv::restore(prompt = FALSE)"
 
 EXPOSE 3838
 
