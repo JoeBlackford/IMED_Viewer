@@ -1,20 +1,23 @@
-FROM rocker/shiny:4.6.1
+FROM rocker/r-ver:4.6.1
 
 # Install system libraries required by sf and terra
 RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    libabsl-dev \
     libgdal-dev \
     libgeos-dev \
     libproj-dev \
     libudunits2-dev \
+    libsqlite3-dev \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages
-RUN Rscript -e "install.packages(c('shiny','leaflet','terra','sf','dplyr','R6','leafem','bslib','RColorBrewer','shinycssloaders'), repos='https://cloud.r-project.org')"
-
-RUN Rscript -e "library(leaflet); library(terra); library(sf); cat('Packages OK\n')"
+RUN Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
+RUN Rscript -e "renv::restore()"
 
 # Copy app
 COPY . /srv/shiny-server/
