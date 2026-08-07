@@ -1,8 +1,10 @@
-library(bslib)
+library(shiny)
 
-ui <- page_fluid(
-  theme = bs_theme(
-    bootswatch = "flatly"
-  ),
-  h2("Hello")
+ui <- fluidPage(
+  titlePanel("Hello"),
+  p("Test")
 )
+
+server <- function(input, output, session){}
+
+shinyApp(ui, server)
