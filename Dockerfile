@@ -21,7 +21,7 @@ RUN R -e "install.packages(c( \
     'R6', \
     'leafem', \
     'bslib', \
-    'RColorBrewer' \
+    'RColorBrewer', \
     'shinycssloaders' \
 ), repos='https://cloud.r-project.org')"
 
