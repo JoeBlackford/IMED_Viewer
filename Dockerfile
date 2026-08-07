@@ -22,6 +22,7 @@ RUN R -e "install.packages(c( \
     'leafem', \
     'bslib', \
     'RColorBrewer' \
+    'shinycssloaders' \
 ), repos='https://cloud.r-project.org')"
 
 # Copy app
