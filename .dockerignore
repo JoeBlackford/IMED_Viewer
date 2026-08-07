@@ -4,3 +4,5 @@
 .RData
 *.html
 *_files
+# Original COGs not used by deployed app
+data/cogs/
