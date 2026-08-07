@@ -12,18 +12,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages
-RUN Rscript -e "install.packages(c(
-'shiny',
-'leaflet',
-'terra',
-'sf',
-'dplyr',
-'R6',
-'leafem',
-'bslib',
-'RColorBrewer',
-'shinycssloaders'
-), repos='https://cloud.r-project.org', dependencies=TRUE)"
+RUN Rscript -e "install.packages(c('shiny','leaflet','terra','sf','dplyr','R6','leafem','bslib','RColorBrewer','shinycssloaders'), repos='https://cloud.r-project.org', dependencies=TRUE)"
 
 # Copy app
 COPY . /srv/shiny-server/
