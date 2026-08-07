@@ -140,17 +140,22 @@ server <- function(input, output, session){
     )
     
   })
-  ####################################################################
-  # Current raster (cached)
-  ####################################################################
+  
+  ########################################################################
+  # Current raster (loaded on demand)
+  ########################################################################
   
   current_raster <- reactive({
     
     info <- current_info()
     
-    req(info$filename %in% names(raster_cache))
-    
-    raster_cache[[info$filename]]
+    terra::rast(
+      file.path(
+        "data",
+        "cogs_3857",
+        info$filename
+      )
+    )
     
   })
   ####################################################################
@@ -349,18 +354,38 @@ server <- function(input, output, session){
   # England Electoral Ward Overlay
   ####################################################################
   
+  wards_cache <- reactiveVal(NULL)
+  
   observe({
     
     proxy <- leafletProxy("map")
     
-    proxy %>%
-      clearGroup("wards")
+    proxy %>% clearGroup("wards")
     
     if (isTRUE(input$show_wards)) {
       
+      if (is.null(wards_cache())) {
+        
+        wards <- sf::st_read(
+          "data/boundaries/2021 Wards England.json",
+          quiet = TRUE
+        )
+        
+        if (is.na(sf::st_crs(wards)))
+          sf::st_crs(wards) <- 27700
+        
+        wards <- sf::st_transform(
+          wards,
+          4326
+        )
+        
+        wards_cache(wards)
+        
+      }
+      
       proxy %>%
         addPolygons(
-          data = wards,
+          data = wards_cache(),
           group = "wards",
           color = "#333333",
           weight = 1,
@@ -373,15 +398,24 @@ server <- function(input, output, session){
             textsize = "13px",
             style = list(
               "font-weight" = "bold",
-              "padding" = "6px" )),
+              "padding" = "6px"
+            )
+          ),
           highlightOptions = highlightOptions(
             weight = 3,
             color = "#0072B2",
-            bringToFront = TRUE ))}})
+            bringToFront = TRUE
+          )
+        )
+      
+    }
+    
+  })
   
   ####################################################################
   # Gloucestershire Electoral Ward Overlay
   ####################################################################
+  glos_wards_cache <- reactiveVal(NULL)
   
   observe({
     
@@ -392,9 +426,30 @@ server <- function(input, output, session){
     
     if (isTRUE(input$show_glos_wards)) {
       
+      # Load once on first use
+      if (is.null(glos_wards_cache())) {
+        
+        glos_wards <- sf::st_read(
+          "data/boundaries/2021 Wards Gloucestershire.json",
+          quiet = TRUE
+        )
+        
+        if (is.na(sf::st_crs(glos_wards))) {
+          sf::st_crs(glos_wards) <- 27700
+        }
+        
+        glos_wards <- sf::st_transform(
+          glos_wards,
+          4326
+        )
+        
+        glos_wards_cache(glos_wards)
+        
+      }
+      
       proxy %>%
         addPolygons(
-          data = glos_wards,
+          data = glos_wards_cache(),
           group = "glos_wards",
           color = "black",
           weight = 2,
