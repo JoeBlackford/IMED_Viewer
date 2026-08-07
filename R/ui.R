@@ -177,14 +177,9 @@ ui <- fluidPage(
     ####################################################################
     
     column(
-      
       width = 8,
       
-      leafletOutput(
-        "map",
-        height = "85vh"
-      )
-      
+      h2("Map will appear here")
     )
     
   )
