@@ -2,26 +2,14 @@
 # LOAD THE PACKAGES
 ########################################################################
 
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-
-packages <- c(
-  "shiny",
-  "leaflet",
-  "terra",
-  "sf",
-  "dplyr",
-  "R6","leafem","shinycssloaders"
-)
-
-package.check <- lapply(
-  packages,
-  FUN = function(x) {
-    if (!require(x, character.only = TRUE)) {
-      install.packages(x, dependencies = TRUE)
-      library(x, character.only = TRUE)
-    }
-  }
-)
+library("shiny")
+library("leaflet")
+library("leafem")
+library("sf")
+library("terra")
+library("dplyr")
+library("R6")
+library("shinycssloaders")
 
 ########################################################################
 # Raster catalogue
